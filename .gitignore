@@ -1,0 +1,25 @@
+# Python
+backend/venv/
+backend/__pycache__/
+backend/**/__pycache__/
+**/*.pyc
+**/*.pyo
+backend/.env
+backend/vector-db/chroma_db/
+backend/uploads/
+*.log
+
+# Node / Next.js
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/.env*
+frontend/*.tsbuildinfo
+
+# macOS
+.DS_Store
+
+# Testing
+backend/.pytest_cache/
+frontend/coverage/
