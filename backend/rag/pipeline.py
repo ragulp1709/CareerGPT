@@ -1,5 +1,5 @@
 from langchain_core.documents import Document
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from services.vector_store import add_documents, similarity_search
 from services.ai_service import get_llm
 from langchain_core.messages import HumanMessage, SystemMessage
