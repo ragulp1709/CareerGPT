@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 import logging
+import os
 
 from config import settings
 from database import connect_db, close_db
@@ -17,7 +18,11 @@ logger = logging.getLogger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.info("Starting CareerGPT API...")
-    await connect_db()
+    try:
+        await connect_db()
+        logger.info("Database connected successfully.")
+    except Exception as e:
+        logger.error(f"Database connection failed: {e}")
     yield
     await close_db()
     logger.info("CareerGPT API stopped.")
@@ -65,3 +70,10 @@ async def root():
 @app.get("/health")
 async def health():
     return {"status": "healthy"}
+
+
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.environ.get("PORT", 10000))
+    logger.info(f"Starting server on port {port}")
+    uvicorn.run(app, host="0.0.0.0", port=port, log_level="info")
